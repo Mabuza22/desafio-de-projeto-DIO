@@ -17,4 +17,5 @@
   - Exibir lista de cliente;
   - Exibir lista de contas;
   - Sair.
-Todas as entradas são feitas pelo terminal, assim como todas as saídas são feitas for ele.
+
+###### Todas as entradas são feitas pelo terminal, assim como todas as saídas são feitas for ele.
