@@ -7,10 +7,11 @@ import java.util.Set;
 
 public class Banco {
 
-    static Set<Conta> contas = new HashSet<>();
-    static Set<Cliente> clientes = new HashSet<>();
+    static Set<Conta> contas = new HashSet<>(); //Lista de todas as contas criadas
+    static Set<Cliente> clientes = new HashSet<>(); //lista de todos os clientes cadastrados
 
     public static void main(String[] args){
+        //Variáveis de controle
         int escolha, entradaInt;
         double entradaDouble;
         String entradaNome;
@@ -18,6 +19,7 @@ public class Banco {
         Cliente client;
         Scanner scanString = new Scanner(System.in);
         do {
+            //print da interface do software
             System.out.println("     BANCO\n" +
                     "Opcoes:\n " +
                     "1 -  Novo cliente\n " +
@@ -38,45 +40,43 @@ public class Banco {
                 case 0: {
                     return;
                 }
-                case 1:{ //NOVO CLIENTE
+                case 1:{ //CADASTRA NOVO CLIENTE
                     System.out.print("Digite o nome do cliente: ");
                     entradaNome = scanString.nextLine();
                     client = cadastrarCliente(entradaNome);
                     System.out.println("Cliente " + client.getNome() + " cadastrado com sucesso!");
                 }break;
-                case 2:{ //NOVA CONTA CORRENTE
+                case 2:{ //CRIA NOVA CONTA CORRENTE
                     System.out.print("Digite o nome do cliente dono da conta corrente: ");
                     conta1 = criarContaCorrente(scanString.nextLine());
                     if (conta1 != null){
-                        System.out.println("Conta corrente " + conta1.getNumero() + " cadastrada com sucesso!");
+                        System.out.printf("Conta corrente %06d cadastrada com sucesso!\n", conta1.getNumero());
                     } else{
-                        System.out.println("Erro ao criar a conta");
+                        System.out.println("Erro ao criar a conta.");
                     }
                 }break;
-                case 3:{ // NOVA CONTA POUPANCA
+                case 3:{ //CRIA NOVA CONTA POUPANCA
                     System.out.print("Digite o nome do cliente dono da conta poupanca: ");
                     conta1 = criarContaPoupanca(scanString.nextLine());
                     if (conta1 != null){
-                        System.out.println("Conta poupanca " + conta1.getNumero() + " cadastrada com sucesso!");
+                        System.out.printf("Conta poupanca %06d cadastrada com sucesso!\n", conta1.getNumero());
                     } else {
                         System.out.println("Erro ao criar a conta");
                     }
                 }break;
-                case 4:{ // DEPOSITO
+                case 4:{ //FAZ UM DEPOSITO
                     System.out.print("Digite o numero da conta: ");
                     entradaInt = lerInt();
                     if (entradaInt == -1){
                         System.out.println("Entrada inválida!");
                         break;
                     }
-
-                    System.out.println("entrada: " + entradaInt);
                     conta1 = null;
                     if (contas.isEmpty()){
                         System.out.println("Nao existe nenhuma conta");
                         break;
                     }
-                    for (Conta conta : contas) {
+                    for (Conta conta : contas) { //PROCURA PELA CONTA
                         if (conta.getNumero() == entradaInt){
                             conta1 = conta;
                             break;
@@ -94,7 +94,7 @@ public class Banco {
                         conta1.depositar(entradaDouble);
                     }
                 }break;
-                case 5:{ //SAQUE
+                case 5:{ //FAZ SAQUE
                     System.out.print("Digite o numero da conta: ");
                     entradaInt = lerInt();
                     if (entradaInt == -1){
@@ -102,7 +102,7 @@ public class Banco {
                         break;
                     }
                     conta1 = null;
-                    for (Conta conta : contas) {
+                    for (Conta conta : contas) { //PROCURA PELA CONTA
                         if (conta.getNumero() == entradaInt){
                             conta1 = conta;
                             break;
@@ -120,7 +120,7 @@ public class Banco {
                         conta1.sacar(entradaDouble);
                     }
                 }break;
-                case 6: { //TRANSACAO
+                case 6: { //FAZ UMA TRANSACAO
                     System.out.print("Digite o numero da conta de origem: ");
                     entradaInt = lerInt();
                     if (entradaInt == -1){
@@ -129,7 +129,7 @@ public class Banco {
                     }
                     conta1 = null;
                     conta2 = null;
-                    for (Conta conta : contas) {
+                    for (Conta conta : contas) { //PROCURA PELA CONTA
                         if (conta.getNumero() == entradaInt){
                             conta1 = conta;
                             break;
@@ -146,7 +146,7 @@ public class Banco {
                             break;
                         }
 
-                        for (Conta conta : contas) {
+                        for (Conta conta : contas) { //PROCURA PELA CONTA
                             if (conta.getNumero() == entradaInt){
                                 conta2 = conta;
                                 break;
@@ -169,7 +169,7 @@ public class Banco {
                 case 7:{ //DADOS DO CLIENTE
                     System.out.print("Insira o nome do cliente: ");
                     entradaNome = scanString.nextLine();
-                    for (Cliente cliente : clientes) {
+                    for (Cliente cliente : clientes) { //PROCURA PELO CLIENTE
                         if (cliente.getNome().equalsIgnoreCase(entradaNome)) {
                             cliente.informacoes();
                             break;
@@ -183,7 +183,7 @@ public class Banco {
                         System.out.println("Entrada inválida!");
                         break;
                     }
-                    for (Conta conta : contas){
+                    for (Conta conta : contas){ //PROCURA PELA CONTA
                         if (conta.getNumero() == entradaInt){
                             conta.informacoes();
                             break;
@@ -207,7 +207,7 @@ public class Banco {
                 }
             }
             System.out.print("Aperte a tecla \"enter\" para seguir! ");
-            scanString.nextLine();
+            scanString.nextLine(); //APENAS PARA O USUÁRIO PODER VER O RESULTADO DA OPERACAO
             System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }while(true);
     }
@@ -220,7 +220,7 @@ public class Banco {
 
     static Conta criarContaCorrente(String nome){
 
-        for (Cliente cliente : clientes){
+        for (Cliente cliente : clientes){//PROCURA PELO CLIENTE
             if (cliente.getNome().equalsIgnoreCase(nome)){
                 Conta conta = new ContaCorrente(cliente);
                 contas.add(conta);
@@ -233,7 +233,7 @@ public class Banco {
 
     static Conta criarContaPoupanca(String nome){
 
-        for (Cliente cliente : clientes){
+        for (Cliente cliente : clientes){//PROCURA PELO CLIENTE
             if (cliente.getNome().equalsIgnoreCase(nome)){
                 Conta conta = new ContaPoupanca(cliente);
                 contas.add(conta);
@@ -251,7 +251,7 @@ public class Banco {
             entradaInt = scan.nextInt();
         }
         catch(InputMismatchException erro){
-            entradaInt = -1;
+            entradaInt = -1;//RETORNA -1 SE A ENTRADA NAO FOR INTEIRA
         }
 
         return entradaInt;
@@ -263,7 +263,7 @@ public class Banco {
         try {
             entradaDouble = scan.nextDouble();
         } catch (InputMismatchException erro){
-            entradaDouble = -1;
+            entradaDouble = -1; //RETORNA -1 SE A ENTRADA NAO FOR UM DOUBLE
         }
         return entradaDouble;
     }

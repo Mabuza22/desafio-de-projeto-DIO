@@ -1,7 +1,7 @@
 # Desafio de projeto da DIO
 
 #### Objetivo
- - Oobjetivo deste projeto é mostrar meus conheciomentos de lógica de porgramação e habilidades com a linguagem JAVA
+ - O objetivo deste projeto é mostrar meus conheciomentos de lógica de porgramação, habilidades com a linguagem JAVA e o uso de Padrões de Projeto, como builder e iterator.
  
  
  ### O Sistema

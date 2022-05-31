@@ -2,7 +2,7 @@
 
 public class ContaCorrente extends Conta{
 
-    public ContaCorrente(Cliente cliente) {
+    public ContaCorrente(Cliente cliente) { //CONSTRUCTOR DE CONTA CORRENTE
         super(cliente);
         this.setTipo("corrente");
     }

@@ -11,57 +11,57 @@ public class Conta {
 
     private String tipo;
 
-    public void informacoes(){
+    public void informacoes(){ //IMPRIME AS INFORMACOES DA CONTA
         System.out.printf("Conta: %06d\n" +
                 "Tipo: %s\n" +
                 "Cliente: %s\n" +
                 "Saldo: %.2f\n\n", numero, tipo, cliente.getNome(), saldo);
     }
 
-    public Conta(Cliente cliente) {
+    public Conta(Cliente cliente) { //CONSTRUCTOR DE CONTA
         this.numero = ++numeroContas;
         this.saldo = 0;
         this.cliente = cliente;
         cliente.adicionarConta(this);
     }
 
-    void sacar(double valor){
-        if(valor < 0){
+    void sacar(double valor){ //RETIRA O VALOR DA CONTA
+        if(valor < 0){//VERIFICA SE O VALOR E POSITIVO
             System.out.println("Valor invalido.");
             return;
         }
-        if (valor > this.saldo){
+        if (valor > this.saldo){ // VERIFICA SE TEM SALDO SUFICIENTE
             System.out.println("Saldo insuficiente.");
             return;
         }
         this.saldo -= valor;
-        System.out.printf("Saque de %.2f na conta " + this.numero + " efetuado com sucesso!\n", valor);
+        System.out.printf("Saque de %.2f na conta %06d efetuado com sucesso!\n", valor, this.numero);
 
     }
 
-    void depositar(double valor){
-        if (valor < 0){
+    void depositar(double valor){ //ADICIONA O VALOR NA CONTA
+        if (valor < 0){ //VERIFICA SE O VALOR E VALIDO
             System.out.println("Valor invalido");
             return;
         }
         this.saldo += valor;
-        System.out.printf("Deposito de %.2f na conta " + this.numero + " efetuado com sucesso!\n", valor);
+        System.out.printf("Deposito de %.2f na conta %06d efetuado com sucesso!\n", valor, this.numero);
 
     }
 
-    void transferir(double valor, Conta destino){
-        if (valor < 0){
+    void transferir(double valor, Conta destino){ //RETIRA O VALOR DE UMA CONTA E ADIONA NA OUTRA
+        if (valor < 0){ //VERIFICA SE O VALOR E VALIDO
             System.out.println("Valor invalido.");
             return;
         }
-        if (valor > this.saldo){
+        if (valor > this.saldo){ //VERIFICA SE TEM SALDO SUFICIENTE
             System.out.println("Saldo insuficiente.");
             return;
         }
 
         this.saldo -= valor;
         destino.saldo += valor;
-        System.out.println("Transferencia de " + valor + " da conta " + this.numero + " para conta " + destino.getNumero() + " efetuada con sucesso!");
+        System.out.printf("Transferencia de " + valor + " da conta %06d para conta %06d efetuada com sucesso!\n", this.numero, destino.getNumero());
 
     }
 
@@ -76,20 +76,6 @@ public class Conta {
     public void setTipo (String tipo){
         this.tipo = tipo;
     }
-//    public void setNumero(int numero) {
-//        this.numero = numero;
-//    }
-//
-//    public double getSaldo() {
-//        return this.saldo;
-//    }
-//
-//    public Cliente getCliente() {
-//        return this.cliente;
-//    }
-//
-//    public void setCliente(Cliente cliente) {
-//        this.cliente = cliente;
-//    }
+
 
 }
